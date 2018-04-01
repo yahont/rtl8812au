@@ -1,4 +1,4 @@
-8812au module for linux kernel 4.15
+Realtek 8812au driver for linux kernel 4.15
 ==============
 
 ** THERE IS ABSOLUTELY NO WARRANTY **
@@ -8,7 +8,7 @@ See the GNU General Public License for more details.
 What is it?
 --------------
 
-The original driver by Realtek for Linux kernel version 3 has been modified to support kernel 4.15
+The original driver 8812au by Realtek for Linux kernel version 3 has been modified to support kernel 4.15
 
 It was tried with USB adapter TP-Link Model No. Archer T4UH (2357:010e) with vanilla kernel 4.15.14 on Gentoo.
 
