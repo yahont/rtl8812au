@@ -343,12 +343,10 @@ int rtw_android_cmdstr_to_num(char *cmdstr)
 {
 	int cmd_num;
 	for(cmd_num=0 ; cmd_num<ANDROID_WIFI_CMD_MAX; cmd_num++)
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-		if(0 == strnicmp(cmdstr , android_wifi_cmd_str[cmd_num], strlen(android_wifi_cmd_str[cmd_num])) )
-#else
+    {
 		if(0 == strncasecmp(cmdstr , android_wifi_cmd_str[cmd_num], strlen(android_wifi_cmd_str[cmd_num])) )
-#endif
 			break;
+    }
 
 	return cmd_num;
 }
@@ -575,11 +573,7 @@ int rtw_android_priv_cmd(struct net_device *net, struct ifreq *ifr, int cmd)
 		goto exit;
 	}
 #ifdef CONFIG_COMPAT
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-	if(is_compat_task())
-#else
     if(in_compat_syscall())
-#endif
 	{
 		/* User space is 32-bit, use compat ioctl */
 		compat_android_wifi_priv_cmd compat_priv_cmd;

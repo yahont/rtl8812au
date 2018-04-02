@@ -732,13 +732,8 @@ extern void rtw_atimdone_event_callback(_adapter *adapter, u8 *pbuf);
 extern void rtw_cpwm_event_callback(_adapter *adapter, u8 *pbuf);
 extern void rtw_wmm_event_callback(PADAPTER padapter, u8 *pbuf);
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-extern void rtw_join_timeout_handler(RTW_TIMER_HDL_ARGS);
-extern void _rtw_scan_timeout_handler(RTW_TIMER_HDL_ARGS);
-#else
 extern void rtw_join_timeout_handler(struct timer_list *timer);
 extern void _rtw_scan_timeout_handler(struct timer_list *timer);
-#endif
 
 thread_return event_thread(thread_context context);
 

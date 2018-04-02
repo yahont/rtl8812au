@@ -30,11 +30,7 @@
 
 #if defined(CONFIG_RTL8723A) || defined(CONFIG_RTL8723B) || defined(CONFIG_RTL8821A)
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-void MPh2c_timeout_handle(void *FunctionContext)
-#else
 void MPh2c_timeout_handle(struct timer_list *timer)
-#endif
 {
 	PADAPTER pAdapter;
 	PMPT_CONTEXT pMptCtx;
@@ -42,11 +38,7 @@ void MPh2c_timeout_handle(struct timer_list *timer)
 
 	DBG_8192C("[MPT], MPh2c_timeout_handle \n");
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-	pAdapter = (PADAPTER)FunctionContext;
-#else
 	pAdapter = from_timer(pAdapter, timer, mppriv.MptCtx.MPh2c_timeout_timer);
-#endif
 
 	pMptCtx = &pAdapter->mppriv.MptCtx;
 

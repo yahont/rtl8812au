@@ -687,17 +687,9 @@ void rtw_os_read_port(_adapter *padapter, struct recv_buf *precvbuf)
 
 }
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-void _rtw_reordering_ctrl_timeout_handler (void *FunctionContext)
-#else
 void _rtw_reordering_ctrl_timeout_handler (struct timer_list *timer)
-#endif
 {
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-	struct recv_reorder_ctrl *preorder_ctrl = (struct recv_reorder_ctrl *)FunctionContext;
-#else
 	struct recv_reorder_ctrl *preorder_ctrl = from_timer(preorder_ctrl, timer, reordering_ctrl_timer);
-#endif
 	rtw_reordering_ctrl_timeout_handler(preorder_ctrl);
 }
 

@@ -261,19 +261,9 @@ __inline static void rtw_list_delete(_list *plist)
 
 #define RTW_TIMER_HDL_ARGS void *FunctionContext
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-__inline static void _init_timer(_timer *ptimer,_nic_hdl nic_hdl,void *pfunc,void* cntx)
-#else
 __inline static void _init_timer(_timer *ptimer,_nic_hdl nic_hdl,void (*timer_callback)(struct timer_list*),void* cntx)
-#endif
 {
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-	ptimer->function = pfunc;
-	ptimer->data = (unsigned long)cntx;
-	init_timer(ptimer);
-#else
     timer_setup(ptimer, timer_callback, 0);
-#endif
 }
 
 __inline static void _set_timer(_timer *ptimer,u32 delay_time)

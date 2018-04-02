@@ -1,5 +1,11 @@
-*.ko
+/.cache.mk
+/.tmp_versions
+/8812au.mod.c
+/Module.symvers
+/modules.order
+/*.ko
 *.ko.cmd
 *.o
+*.o.d
 *.o.cmd
 *.swp

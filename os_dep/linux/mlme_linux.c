@@ -62,47 +62,23 @@ _func_exit_;
 }
 #endif
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-void rtw_join_timeout_handler (void *FunctionContext)
-#else
 void rtw_join_timeout_handler (struct timer_list *timer)
-#endif
 {
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-	_adapter *adapter = (_adapter *)FunctionContext;
-#else
 	_adapter *adapter = from_timer(adapter, timer, mlmepriv.assoc_timer);
-#endif
 	_rtw_join_timeout_handler(adapter);
 }
 
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-void _rtw_scan_timeout_handler (void *FunctionContext)
-#else
 void _rtw_scan_timeout_handler (struct timer_list *timer)
-#endif
 {
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-	_adapter *adapter = (_adapter *)FunctionContext;
-#else
 	_adapter *adapter = from_timer(adapter, timer, mlmepriv.scan_to_timer);
-#endif
 	rtw_scan_timeout_handler(adapter);
 }
 
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-void _dynamic_check_timer_handlder (void *FunctionContext)
-#else
 void _dynamic_check_timer_handlder (struct timer_list *timer)
-#endif
 {
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-	_adapter *adapter = (_adapter *)FunctionContext;
-#else
 	_adapter *adapter = from_timer(adapter, timer, mlmepriv.dynamic_chk_timer);
-#endif
 
 #if (MP_DRIVER == 1)
 	if (adapter->registrypriv.mp_mode == 1 && adapter->mppriv.mp_dm ==0) //for MP ODM dynamic Tx power tracking
@@ -124,17 +100,9 @@ void _dynamic_check_timer_handlder (struct timer_list *timer)
 }
 
 #ifdef CONFIG_SET_SCAN_DENY_TIMER
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-void _rtw_set_scan_deny_timer_hdl(void *FunctionContext)
-#else
 void _rtw_set_scan_deny_timer_hdl(struct timer_list *timer)
-#endif
 {
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0))
-	_adapter *adapter = (_adapter *)FunctionContext;	 
-#else
 	_adapter *adapter = from_timer(adapter, timer, mlmepriv.set_scan_deny_timer);
-#endif
 	rtw_set_scan_deny_timer_hdl(adapter);
 }
 #endif
@@ -344,60 +312,28 @@ _func_exit_;
 
 }
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-void _survey_timer_hdl (void *FunctionContext)
-#else
 void _survey_timer_hdl (struct timer_list *timer)
-#endif
 {
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-	_adapter *padapter = (_adapter *)FunctionContext;
-#else
 	_adapter *padapter = from_timer(padapter, timer, mlmeextpriv.survey_timer);
-#endif
 	survey_timer_hdl(padapter);
 }
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-void _link_timer_hdl (void *FunctionContext)
-#else
 void _link_timer_hdl (struct timer_list *timer)
-#endif
 {
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-	_adapter *padapter = (_adapter *)FunctionContext;
-#else
 	_adapter *padapter = from_timer(padapter, timer, mlmeextpriv.link_timer);
-#endif
 	link_timer_hdl(padapter);
 }
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-void _addba_timer_hdl (void *FunctionContext)
-#else
 void _addba_timer_hdl (struct timer_list *timer)
-#endif
 {
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-	struct sta_info *psta = (struct sta_info *)FunctionContext;
-#else
 	struct sta_info *psta = from_timer(psta, timer, addba_retry_timer);
-#endif
 	addba_timer_hdl(psta);
 }
 
 #ifdef CONFIG_IEEE80211W
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-void _sa_query_timer_hdl (void *FunctionContext)
-#else
 void _sa_query_timer_hdl (struct timer_list *timer)
-#endif
 {
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,15,0)
-	_adapter *padapter = (_adapter *)FunctionContext;
-#else
 	_adapter *padapter = from_timer(padapter, timer, mlmeextpriv.sa_query_timer);
-#endif
 	sa_query_timer_hdl(padapter);
 }
 #endif //CONFIG_IEEE80211W
