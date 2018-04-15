@@ -197,7 +197,7 @@ Phydm_MACEDCCAState(
 		ODM_SetMACReg(pDM_Odm, REG_TX_PTCL_CTRL, BIT15, 1);	/*ignore EDCCA	reg520[15]=1*/
 		ODM_SetMACReg(pDM_Odm, REG_RD_CTRL, BIT11, 0);			/*reg524[11]=0*/
 	} else {	/*don't set MAC ignore EDCCA signal*/
-		ODM_SetMACReg(pDM_Odm, REG_TX_PTCL_CTRL, BIT15, 0);	/*don't ignore EDCCA	 reg520[15]=0*/
+		ODM_SetMACReg(pDM_Odm, REG_TX_PTCL_CTRL, BIT15, 0);	/*don't ignore EDCCA	 reg520[15]=0*/
 		ODM_SetMACReg(pDM_Odm, REG_RD_CTRL, BIT11, 1);			/*reg524[11]=1	*/
 	}
 	ODM_RT_TRACE(pDM_Odm, PHYDM_COMP_ADAPTIVITY, ODM_DBG_LOUD, ("EDCCA enable State = %d\n", State));

@@ -132,36 +132,9 @@ typedef struct _Dynamic_Primary_CCA{
 
 
 #if(DM_ODM_SUPPORT_TYPE & (ODM_AP|ODM_ADSL))
-
-
 #ifdef ADSL_AP_BUILD_WORKAROUND
 #define MAX_TOLERANCE			5
 #define IQK_DELAY_TIME			1		//ms
-#endif
-#if 0//defined in 8192cd.h
-//
-// Indicate different AP vendor for IOT issue.
-//
-typedef enum _HT_IOT_PEER
-{
-	HT_IOT_PEER_UNKNOWN 			= 0,
-	HT_IOT_PEER_REALTEK 			= 1,
-	HT_IOT_PEER_REALTEK_92SE 		= 2,
-	HT_IOT_PEER_BROADCOM 		= 3,
-	HT_IOT_PEER_RALINK 			= 4,
-	HT_IOT_PEER_ATHEROS 			= 5,
-	HT_IOT_PEER_CISCO 				= 6,
-	HT_IOT_PEER_MERU 				= 7,	
-	HT_IOT_PEER_MARVELL 			= 8,
-	HT_IOT_PEER_REALTEK_SOFTAP 	= 9,// peer is RealTek SOFT_AP, by Bohn, 2009.12.17
-	HT_IOT_PEER_SELF_SOFTAP 		= 10, // Self is SoftAP
-	HT_IOT_PEER_AIRGO 				= 11,
-	HT_IOT_PEER_INTEL 				= 12, 
-	HT_IOT_PEER_RTK_APCLIENT 		= 13, 
-	HT_IOT_PEER_REALTEK_81XX 		= 14,	
-	HT_IOT_PEER_REALTEK_WOW 		= 15,	
-	HT_IOT_PEER_MAX 				= 16
-}HT_IOT_PEER_E, *PHTIOT_PEER_E;
 #endif
 #endif//#if(DM_ODM_SUPPORT_TYPE & (ODM_AP|ODM_ADSL))
 
@@ -267,7 +240,6 @@ typedef struct _ODM_Mac_Status_Info_
 // 2011/20/20 MH For MP driver RT_WLAN_STA =  STA_INFO_T
 // Please declare below ODM relative info in your STA info structure.
 //
-#if 1
 typedef		struct _ODM_STA_INFO{
 	// Driver Write
 	BOOLEAN		bUsed;				// record the sta status link or not?
@@ -281,51 +253,7 @@ typedef		struct _ODM_STA_INFO{
 	u1Byte		RXEVM[4];
 	u1Byte		RXSNR[4];
 
-	// ODM Write
-	//1 TX_INFO (may changed by IC)
-	//TX_INFO_T		pTxInfo;				// Define in IC folder. Move lower layer.
-#if 0
-	u1Byte		ANTSEL_A;			//in Jagar: 4bit; others: 2bit
-	u1Byte		ANTSEL_B;			//in Jagar: 4bit; others: 2bit
-	u1Byte		ANTSEL_C;			//only in Jagar: 4bit
-	u1Byte		ANTSEL_D;			//only in Jagar: 4bit
-	u1Byte		TX_ANTL;			//not in Jagar: 2bit
-	u1Byte		TX_ANT_HT;			//not in Jagar: 2bit
-	u1Byte		TX_ANT_CCK;			//not in Jagar: 2bit
-	u1Byte		TXAGC_A;			//not in Jagar: 4bit
-	u1Byte		TXAGC_B;			//not in Jagar: 4bit
-	u1Byte		TXPWR_OFFSET;		//only in Jagar: 3bit
-	u1Byte		TX_ANT;				//only in Jagar: 4bit for TX_ANTL/TX_ANTHT/TX_ANT_CCK
-#endif
-
-	//
-	// 	Please use compile flag to disabe the strcutrue for other IC except 88E.
-	//	Move To lower layer.
-	//
-	// ODM Write Wilson will handle this part(said by Luke.Lee)
-	//TX_RPT_T		pTxRpt;				// Define in IC folder. Move lower layer.
-#if 0	
-	//1 For 88E RA (don't redefine the naming)
-	u1Byte		rate_id;
-	u1Byte		rate_SGI;
-	u1Byte		rssi_sta_ra;
-	u1Byte		SGI_enable;
-	u1Byte		Decision_rate;
-	u1Byte		Pre_rate;
-	u1Byte		Active;
-
-	// Driver write Wilson handle.
-	//1 TX_RPT (don't redefine the naming)
-	u2Byte		RTY[4];				// ???
-	u2Byte		TOTAL;				// ???
-	u2Byte		DROP;				// ???
-	//
-	// Please use compile flag to disabe the strcutrue for other IC except 88E.
-	//
-#endif
-
 }ODM_STA_INFO_T, *PODM_STA_INFO_T;
-#endif
 
 //
 // 2011/10/20 MH Define Common info enum for all team.

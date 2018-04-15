@@ -20,39 +20,6 @@
 #ifndef _RTW_MP_H_
 #define _RTW_MP_H_
 
-#if 0
-#define MPT_NOOP			0
-#define MPT_READ_MAC_1BYTE		1
-#define MPT_READ_MAC_2BYTE		2
-#define MPT_READ_MAC_4BYTE		3
-#define MPT_WRITE_MAC_1BYTE		4
-#define MPT_WRITE_MAC_2BYTE		5
-#define MPT_WRITE_MAC_4BYTE		6
-#define MPT_READ_BB_CCK			7
-#define MPT_WRITE_BB_CCK		8
-#define MPT_READ_BB_OFDM		9
-#define MPT_WRITE_BB_OFDM		10
-#define MPT_READ_RF			11
-#define MPT_WRITE_RF			12
-#define MPT_READ_EEPROM_1BYTE		13
-#define MPT_WRITE_EEPROM_1BYTE		14
-#define MPT_READ_EEPROM_2BYTE		15
-#define MPT_WRITE_EEPROM_2BYTE		16
-#define MPT_SET_CSTHRESHOLD		21
-#define MPT_SET_INITGAIN		22
-#define MPT_SWITCH_BAND			23
-#define MPT_SWITCH_CHANNEL		24
-#define MPT_SET_DATARATE		25
-#define MPT_SWITCH_ANTENNA		26
-#define MPT_SET_TX_POWER		27
-#define MPT_SET_CONT_TX			28
-#define MPT_SET_SINGLE_CARRIER		29
-#define MPT_SET_CARRIER_SUPPRESSION	30
-#define MPT_GET_RATE_TABLE		31
-#define MPT_READ_TSSI			32
-#define MPT_GET_THERMAL_METER		33
-#endif
-
 #define RTWPRIV_VER_INFO	1
 
 #define MAX_MP_XMITBUF_SZ 	2048
@@ -78,12 +45,8 @@ struct mp_xmit_frame
 	u8 *mem_addr;
 	u32 sz[8];
 
-#if defined(PLATFORM_OS_XP) || defined(PLATFORM_LINUX)
+#if defined(PLATFORM_LINUX)
 	PURB pxmit_urb[8];
-#endif
-
-#ifdef PLATFORM_OS_XP
-	PIRP pxmit_irp[8];
 #endif
 
 	u8 bpending[8];
@@ -105,22 +68,6 @@ struct mp_wiparam
 };
 
 typedef void(*wi_act_func)(void* padapter);
-
-#ifdef PLATFORM_WINDOWS
-struct mp_wi_cntx
-{
-	u8 bmpdrv_unload;
-
-	// Work Item
-	NDIS_WORK_ITEM mp_wi;
-	NDIS_EVENT mp_wi_evt;
-	_lock mp_wi_lock;
-	u8 bmp_wi_progress;
-	wi_act_func curractfunc;
-	// Variable needed in each implementation of CurrActFunc.
-	struct mp_wiparam param;
-};
-#endif
 
 struct mp_tx
 {
@@ -418,31 +365,6 @@ struct mp_priv
 	
 	struct wlan_network mp_network;
 	NDIS_802_11_MAC_ADDRESS network_macaddr;
-
-#ifdef PLATFORM_WINDOWS
-	u32 rx_testcnt;
-	u32 rx_testcnt1;
-	u32 rx_testcnt2;
-	u32 tx_testcnt;
-	u32 tx_testcnt1;
-
-	struct mp_wi_cntx wi_cntx;
-
-	u8 h2c_result;
-	u8 h2c_seqnum;
-	u16 h2c_cmdcode;
-	u8 h2c_resp_parambuf[512];
-	_lock h2c_lock;
-	_lock wkitm_lock;
-	u32 h2c_cmdcnt;
-	NDIS_EVENT h2c_cmd_evt;
-	NDIS_EVENT c2h_set;
-	NDIS_EVENT h2c_clr;
-	NDIS_EVENT cpwm_int;
-
-	NDIS_EVENT scsir_full_evt;
-	NDIS_EVENT scsiw_empty_evt;
-#endif
 
 	u8 *pallocated_mp_xmitframe_buf;
 	u8 *pmp_xmtframe_buf;

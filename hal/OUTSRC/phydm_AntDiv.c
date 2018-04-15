@@ -279,11 +279,11 @@ ODM_UpdateRxIdleAnt(
 
 		if(pDM_Odm->SupportICType==ODM_RTL8188E)
 		{		
-			ODM_SetMACReg(pDM_Odm, 0x6D8 , BIT7|BIT6, DefaultAnt);	//PathA Resp Tx
+			ODM_SetMACReg(pDM_Odm, 0x6D8 , BIT7|BIT6, DefaultAnt);	//PathA Resp Tx
 		}
 		else
 		{
-			ODM_SetMACReg(pDM_Odm, 0x6D8 , BIT10|BIT9|BIT8, DefaultAnt);	//PathA Resp Tx
+			ODM_SetMACReg(pDM_Odm, 0x6D8 , BIT10|BIT9|BIT8, DefaultAnt);	//PathA Resp Tx
 		}	
 
 	}
