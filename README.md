@@ -12,6 +12,8 @@ The original driver 8812au by Realtek for Linux kernel version 3 has been modifi
 
 It was tried with USB adapter TP-Link Model No. Archer T4UH (2357:010e) with vanilla kernel 4.15.14 on Gentoo.
 
+Also successfully tried with Zyxel NWD6605 (0586:3426) on Ubuntu Bionic with kernel 4.15.0-55-generic.
+
 It might also work for other USB adapters:
 0BDA:8812
 0BDA:881A
@@ -26,7 +28,6 @@ It might also work for other USB adapters:
 0409:0408
 0B05:17D2
 0E66:0022
-0586:3426
 2001:3313
 1058:0632
 1740:0100
